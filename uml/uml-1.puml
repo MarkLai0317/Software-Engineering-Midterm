@@ -15,7 +15,7 @@ class Book{
 
 class Borrower{
     -String name
-    -Set<int> booksBorrowed
+    -List<int> booksBorrowed
     +List<int> getBorrowedBooks()
     +String getName()
 
@@ -27,8 +27,10 @@ class Library{
     -Map<int, String> LastCheckedOutBy 
     -Map<int, String> IsCheckedOutBy
     -Map<int, Book> books
+    -Map<string, Borrower> borrowers
     -int idCounter
 
+    
 
     +void checkoutBook(Book book)
     +void returnBook(Book book)

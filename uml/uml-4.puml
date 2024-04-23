@@ -16,6 +16,7 @@ class Book{
 class User{
     -String name
     -type String
+    -int predefinedNumber
     -List<int> booksBorrowed
     +List<int> getBorrowedBooks()
     +String getName()
@@ -32,8 +33,9 @@ class Library{
     -Map<int, String> IsCheckedOutBy
     -Map<int, Book> books
     -Map<string, User> users
+    -int idCounter
 
-    
+
     +void checkoutBook(User user, User borrower ,Book book)
     +void returnBook(User user, User borrower,Book book)
 
@@ -50,12 +52,13 @@ class Library{
 }
 
 Library "1" -- "0..*" Book
-Library "1" -- "0..*" User
+Library "1" -- "{must available for check-out or checked out but not both}  0..*" User
 
 note left of  Library::checkoutBook
-    if user.getType() == "Staff"
+    if user.getType() == "Staff" && borrower.getBorrowedBooks().size() < borrower.getPredefinedNumber()  
         doCheckout()
 end note
+
 
 note left of  Library::returnBook
    if user.getType() == "Staff"

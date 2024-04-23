@@ -16,7 +16,7 @@ class Book{
 class User{
     -String name
     -type String
-    -Set<int> booksBorrowed
+    -List<int> booksBorrowed
     +List<int> getBorrowedBooks()
     +String getName()
     +String getType()
@@ -32,9 +32,10 @@ class Library{
     -Map<int, String> LastCheckedOutBy 
     -Map<int, String> IsCheckedOutBy
     -Map<int, Book> books
+    -Map<string, Borrower> borrowers
     -int idCounter
 
-
+    +List<Borrower> getBorrowers()
     +void checkoutBook(Book book)
     +void returnBook(Book book)
 
