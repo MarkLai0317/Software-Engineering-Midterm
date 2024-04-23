@@ -1,0 +1,58 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Book{
+    -long id
+    -String author
+    -String subject
+
+    +long getId()
+    +String getAuthor()
+    +String getSubject()
+
+    +void printBook()
+}
+
+class Borrower{
+    -String name
+    -Set<int> booksBorrowed
+    +String getName()
+
+}
+
+class Library{
+
+    'store last borrower of a book'
+    Map<int, String> LastCheckedOutBy 
+    Map<int, String> IsCheckedOutBy
+    Map<int, Book> books
+
+
+    +void checkoutBook(Book book)
+    +void returnBook(Book book)
+
+    +void addBook(Book book)
+    +void removeBook(Book book)
+
+    +List<Book> getBooksByAuthor(String author)
+    +List<Book> getBooksBySubject(String subject)
+
+    +List<Book> findBooksCheckedOutBy(Borrower borrower)
+
+    +Borrower getLastBorrower(Book book)
+
+}
+
+Library "1" -- "0..*" Book
+Library "1" -- "0..*" Borrower
+
+note left of  Library::checkoutBook
+    modify LastCheckedOutBy
+    modify IsCheckedOutBy
+end note
+
+note left of  Library::returnBook
+    modify LastCheckedOutBy
+    modify IsCheckedOutBy
+end note
+@enduml
