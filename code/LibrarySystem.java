@@ -11,7 +11,7 @@ public class LibrarySystem {
             String line;
             // Read the first line to get the number of books
             int numBooks = Integer.parseInt(reader.readLine());
-            ArrayList<Book> books = new ArrayList<Book>();
+            List<Book> books = new List<Book>();
             for(int i=0; i<numBooks; i++){
                 String[] bookDetails = reader.readLine().split(" ");
                 String Author = bookDetails[0];
@@ -43,34 +43,42 @@ public class LibrarySystem {
                         String Author = bookDetails[0];
                         String Subject = bookDetails[1];
                         Book book = new Book(Author, Subject);
-                        library.addBook(line[0], book); 
+                        library.addBook(line[0], book);
+
                     }else if(line[1].equals("removeBook")){
                         library.removeBook(line[0], Integer.parseInt(line[2]));
+                    
                     }else if(line[1].equals("checkout")){
                         String[] bookIds = reader.readLine().split(" ");
                         for(String bookId: bookIds){
                             library.checkout(line[0], line[2], Integer.parseInt(bookId));
                         }
+                        
                     }else if(line[1].equals("return")){
                         library.returnBook(line[0], Integer.parseInt(line[2]));
+
                     }else if(line[1].equals("listAuthor")){
                         List<Book> booksByAuthor = library.getBooksByAuthor(line[0], line[2]);
                         for(Book book: booksByAuthor){
                             book.printBook();
                         }
+
                     }else if(line[1].equals("listSubject")){
                         List<Book> booksBySubject = library.getBooksBySubject(line[0], line[2]);
                         for(Book book: booksBySubject){
                             book.printBook();
                         }
+
                     }else if(line[1].equals("findChecked")){
                         List<Book> checkedBooks = library.findBooksCheckedOutBy(line[0], line[2]);
                         for(Book book: checkedBooks){
                             book.printBook();
                         }
+
                     }else if(line[1].equals("Borrower")){
                         Borrower borrower = library.getLastBorrower(line[0], line[2]);
                         System.out.println("User: " + borrower.getName());
+
                 } catch (Exception exception) {
                     System.err.println(exception.getMessage());
                 }
@@ -78,7 +86,7 @@ public class LibrarySystem {
             }
 
         } catch (IOException e) {
-            System.err.println("Error reading from file: " + e.getMessage());
+            System.err.println("Error");
             System.exit(1);
         }
     }
