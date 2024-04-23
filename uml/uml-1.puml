@@ -2,11 +2,11 @@
 skinparam classAttributeIconSize 0
 
 class Book{
-    -long id
+    -int id
     -String author
     -String subject
 
-    +long getId()
+    +int getId()
     +String getAuthor()
     +String getSubject()
 
