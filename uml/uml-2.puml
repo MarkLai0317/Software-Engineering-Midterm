@@ -19,6 +19,7 @@ class User{
     -Set<int> booksBorrowed
     +List<int> getBorrowedBooks()
     +String getName()
+    +String getType()
 }
 note left of User::type
     "Borrower" or "Staff"
