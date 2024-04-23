@@ -1,0 +1,88 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Book{
+    -int id
+    -String author
+    -String subject
+
+    +int getId()
+    +String getAuthor()
+    +String getSubject()
+
+    +void printBook()
+}
+
+class User{
+    -String name
+    -type String
+    -Set<int> booksBorrowed
+    +List<int> getBorrowedBooks()
+    +String getName()
+}
+note left of User::type
+    "Borrower" or "Staff"
+end note
+
+
+class Library{
+
+    'store last borrower of a book'
+    -Map<int, String> LastCheckedOutBy 
+    -Map<int, String> IsCheckedOutBy
+    -Map<int, Book> books
+    -int idCounter
+
+
+    +void checkoutBook(User user, Book book)
+    +void returnBook(User user, Book book)
+
+    +void addBook(User user, Book book)
+    +void removeBook(User user, Book book)
+
+    +List<Book> getBooksByAuthor(String author)
+    +List<Book> getBooksBySubject(String subject)
+
+    +List<Book> findBooksCheckedOutBy(User user, User borrower)
+
+    +User getLastBorrower(User user, Book book)
+
+}
+
+Library "1" -- "0..*" Book
+Library "1" -- "0..*" User
+
+note left of  Library::checkoutBook
+    if user.getType() == "Staff"
+        doCheckout()
+end note
+
+note left of  Library::returnBook
+   if user.getType() == "Staff"
+        doReturn()
+end note
+
+note right of Library::addBook
+    if user.getType() == "Staff"
+        doAdd()
+end note
+
+note right of Library::removeBook
+    if user.getType() == "Staff"
+        doRemove()
+end note
+
+note right of Library::findBooksCheckedOutBy
+    if user.getType() == "Staff"
+        doFindBooksCheckedOutBy()
+    else if user.getName() == borrower.getName()
+        doFindBooksCheckedOutBy()
+end note
+
+note left of Library::getLastBorrower
+    if user.getType() == "Staff"
+        doGetLastBorrower()
+end note
+
+
+@enduml
