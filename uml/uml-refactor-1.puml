@@ -1,0 +1,98 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Book{
+    -int id
+    -String author
+    -String subject
+
+    +int getId()
+    +String getAuthor()
+    +String getSubject()
+
+    +void printBook()
+}
+
+
+
+class Staff{
+    -String name
+    +String getName()
+}
+
+class Borrower{
+    -String name
+    -int predefinedNumber
+    -List<int> booksBorrowed
+    +List<int> getBorrowedBooks()
+    +int getPredefinedNumber()
+    +String getName()
+}
+
+
+
+class Library{
+
+    'store last borrower of a book'
+    -Map<int, String> LastCheckedOutBy 
+    -Map<int, String> IsCheckedOutBy
+    -Map<int, Book> books
+    -Map<string, Staff> staffs
+    -Map<string, Borrower> borrowers
+    -int idCounter
+
+
+    +void checkoutBook(String staffName, String borrowerName,int bookId)
+    +void returnBook(String staffName, String borrowerName,int bookId)
+
+    +void addBook(String staffName, Book book)
+    +void removeBook(String staffName, int bookId)
+
+    +List<Book> getBooksByAuthor(String author)
+    +List<Book> getBooksBySubject(String subject)
+
+    +List<Book> findBooksCheckedOutBy(String staffName, String borrowerName)
+
+    +User getLastBorrower(String staffName, int bookId)
+
+}
+
+Library -- "{must available for check-out or checked out but not both} 0..*" Book
+Library -- "1..*" Staff
+Library -- "0..*" Borrower
+
+note left of  Library::checkoutBook
+    if staffs.containsKey(staffName) && borrower.getBorrowedBooks().size() < borrower.getPredefinedNumber()  
+        doCheckout()
+end note
+
+
+note left of  Library::returnBook
+   if staffs.containsKey(staffName)
+        doReturn()
+end note
+
+note right of Library::addBook
+    if staffs.containsKey(staffName)
+        doAdd()
+end note
+
+note right of Library::removeBook
+    if staffs.containsKey(staffName)
+        doRemove()
+end note
+
+note right of Library::findBooksCheckedOutBy
+    if staffs.containsKey(staffName)
+        doFindBooksCheckedOutBy()
+    else if staffs.containsKey(staffName) == borrower.getName()
+        doFindBooksCheckedOutBy()
+end note
+
+note left of Library::getLastBorrower
+    if staffs.containsKey(staffName)
+        doGetLastBorrower()
+end note
+
+
+@enduml
