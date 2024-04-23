@@ -47,16 +47,11 @@ class Library{
 
 }
 
-Library -- "0..*" Book
-Library -- "0..*" Borrower
+Library [bookId] --> "0..*" Book : has
+Library [borrowerName] --> "0..*" Borrower : has
 
-note left of  Library::checkoutBook
-    modify LastCheckedOutBy
-    modify IsCheckedOutBy
-end note
+Borrower [bookId] --> "0..*" Book : borrowed
 
-note left of  Library::returnBook
-    modify LastCheckedOutBy
-    modify IsCheckedOutBy
-end note
+
+
 @enduml

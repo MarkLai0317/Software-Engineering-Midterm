@@ -49,8 +49,10 @@ class Library{
 
 }
 
-Library -- "0..*" Book
-Library -- "0..*" User
+Library [bookId] --> "0..*" Book : has
+Library [name] --> "0..*" User : has
+
+User [bookId] --> "0..*" Book : borrowed
 
 note left of  Library::checkoutBook
     if user.getType() == "Staff"
