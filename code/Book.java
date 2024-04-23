@@ -32,7 +32,7 @@ public class Book {
 
     // Public method to print book details
     public void printBook() {
-        System.out.println("ID: " + id + "Author: " + author + "Subject: " + subject);
+        System.out.println("ID: " + id + " Author: " + author + " Subject: " + subject);
     }
 
 }
