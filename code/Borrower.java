@@ -17,7 +17,7 @@ public class Borrower{
         return this.predefined_borrow_book_number;
     }
 
-    public ArrayList<int> getBooksBorrowed(){
+    public ArrayList<int> getBorrowedBook(){
         return this.booksBorrowed;
     }
 
