@@ -5,11 +5,15 @@ public class Book {
     private String subject;
 
     // Constructor
-    public Book(int id, String author, String subject) {
-        this.id = id;
+    public Book(String author, String subject) {
         this.author = author;
         this.subject = subject;
     }
+    //set id
+    public void setId(int id){
+        this.id = id;
+    }
+
 
     // Public getter for id
     public int getId() {
