@@ -60,7 +60,7 @@ class Library{
         if(checkStaff(borrowerName)){
             raiseError();
         }
-        if(!checkBook(idCounter)){
+        if(!checkBook(bookId)){
             raiseError();
         }
         
@@ -84,7 +84,7 @@ class Library{
         if(!checkStaff(staffName)){
             raiseError();
         }
-        if(!checkBook(idCounter)){
+        if(!checkBook(bookId)){
             raiseError();
         }
 
