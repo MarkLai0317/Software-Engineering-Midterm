@@ -1,3 +1,4 @@
+package code;
 import java.io.*;
 import java.util.*;
 
@@ -20,7 +21,7 @@ class Library{
         }
     }
 
-    private void raiseError(){
+    private void raiseError() throws Exception{
         throw new Exception("Error");
     }
 
@@ -45,14 +46,14 @@ class Library{
     }
 
     public void addStaff(Staff staff){
-        this.staffs.put(staff.name, staff);
+        this.staffs.put(staff.getName(), staff);
     }
 
     public void addBorrower(Borrower borrower){
-        this.borrowers.put(borrower.name, borrower);
+        this.borrowers.put(borrower.getName(), borrower);
     }
 
-    public void addBook(String staffName, Book book){
+    public void addBook(String staffName, Book book) throws Exception{
         if(checkStaff(staffName)){
             this.books.put(this.idCounter++, book);
         }
@@ -64,7 +65,7 @@ class Library{
         }
     }
 
-    public void removeBook(String staffName, int bookId){
+    public void removeBook(String staffName, int bookId) throws Exception{
         if(!checkBook(bookId)){
             raiseError();
         }
@@ -82,54 +83,60 @@ class Library{
     public List<Book> getBooksByAuthor(String author){
         List<Book> booksByAuthor = new ArrayList<>();
         for(Book book: this.books){
-            if(book.author.equals(author)){
+            if(book.getAuthor().equals(author)){
                 booksByAuthor.add(book);
             }
         }
     
         return booksByAuthor;
-      }
+    }
     
-      public List<Book> getBooksBySubject(String subject){
+    public List<Book> getBooksBySubject(String subject){
         List<Book> booksBySubject = new ArrayList<>();
         for(Book book: this.books){
-            if(book.subject.equals(subject)){
+            if(book.getSubject().equals(subject)){
                 booksBySubject.add(book);
             }
         }
     
         return booksBySubject;
-      }
+    }
     
-      public List<Book> findBooksCheckedOutBy(String user, String borrower){
+    public List<Book> findBooksCheckedOutBy(String userName, String borrowerName) throws Exception{
     
-        if(checkStaff(user) && checkBorrower(borrower)){
+        if(checkStaff(userName) && checkBorrower(borrowerName)){
             List<Book> booksCheck = new ArrayList<>();
-            for(int bookId: borrower.getBorrowedBooks()){
+            for(int bookId: borrowerName.getBorrowedBooks()){
                 booksCheck.add(this.books.get(bookId));
             }
             return booksCheck;
         }
-        else if(checkBorrower(user) && !user.equals(borrower)){
+        else if(checkBorrower(userName) && !userName.equals(borrowerName)){
             throw new Exception("Borrower can not find books checked out by other users");
         }
         else{
             raiseError();
         }
-    
-      }
 
-      public Borrower getLastBorrower(String staff, int id){
-        
-        if(checkStaff(staff)){
-            return lastCheckedOutBy.get(id);
+        return null;
+    
+    }
+
+    public Borrower getLastBorrower(String staffName, int bookId) throws Exception{
+        if(!checkBook(bookId)){
+            raiseError();
         }
-        else if(checkBorrower(staff)){
+        if(checkStaff(staffName)){
+            return borrowers.get(lastCheckedOutBy.get(bookId));
+        }
+        else if(checkBorrower(staffName)){
             throw new Exception("Borrower can not find borrower");
         }
         else{
             raiseError();
         }
+                
+        return null;
 
     }
 }
