@@ -43,14 +43,14 @@ class Library{
     +List<Book> getBooksByAuthor(String author)
     +List<Book> getBooksBySubject(String subject)
 
-    +List<Book> findBooksCheckedOutBy(User user, User borrower,User borrower)
+    +List<Book> findBooksCheckedOutBy(User user, User borrower)
 
     +User getLastBorrower(User user, Book book)
 
 }
 
-Library "1" -- "0..*" Book
-Library "1" -- "0..*" User
+Library -- "0..*" Book
+Library -- "0..*" User
 
 note left of  Library::checkoutBook
     if user.getType() == "Staff"

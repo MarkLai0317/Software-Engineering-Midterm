@@ -51,8 +51,8 @@ class Library{
 
 }
 
-Library "1" -- "0..*" Book
-Library "1" -- "0..*" User
+Library -- "0..*" Book
+Library -- "0..*" User
 
 note left of  Library::checkoutBook
     modify LastCheckedOutBy

@@ -47,8 +47,8 @@ class Library{
 
 }
 
-Library "1" -- "0..*" Book
-Library "1" -- "0..*" Borrower
+Library -- "0..*" Book
+Library -- "0..*" Borrower
 
 note left of  Library::checkoutBook
     modify LastCheckedOutBy
