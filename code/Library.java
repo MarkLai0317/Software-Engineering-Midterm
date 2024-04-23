@@ -17,7 +17,9 @@ class Library{
         this.borrowers = new LinkedHashMap<>();
         this.books = new LinkedHashMap<>();
         for(Book book: init_books){
-            this.books.put(this.idCounter++, book);
+            book.setId(this.idCounter);
+            this.books.put(this.idCounter, book);
+            this.idCounter+=1;
         }
     }
 
@@ -45,6 +47,60 @@ class Library{
         return this.books.get(bookId);
     }
 
+    public void checkoutBook(String staffName, String borrowerName, int bookId) throws Exception{
+        if(checkBorrower(staffName)){
+            throw new Exception("Borrower can not check out the books");
+        }
+        if(!checkStaff(staffName)){
+            raiseError();
+        }
+        if(!checkBorrower(borrowerName)){
+            raiseError();
+        }
+        if(checkStaff(borrowerName)){
+            raiseError();
+        }
+        if(!checkBook(idCounter)){
+            raiseError();
+        }
+        
+        if(borrowers.get(borrowerName).getPredefinedBorrowBookNumber() >= borrowers.get(borrowerName).getBorrowedBooksCount()){
+            throw new Exception("Can not check out since the number of books exceed the limitation of user can check-out");
+        }
+
+        if(checkBookCheckOut(bookId)){
+            throw new Exception("Can not check out since the book is checked out.");
+        }
+
+        borrowers.get(borrowerName).addBorrowedBook(bookId);
+        isCheckedOutBy.put(bookId, borrowerName);
+        lastCheckedOutBy.put(bookId, borrowerName);
+    }
+
+    public void returnBook(String staffName, int bookId) throws Exception{
+        if(checkBorrower(staffName)){
+            throw new Exception("Borrower can not return book");
+        }
+        if(!checkStaff(staffName)){
+            raiseError();
+        }
+        if(!checkBook(idCounter)){
+            raiseError();
+        }
+
+        if(!checkBookCheckOut(bookId)){
+            throw new Exception("Can not return since the book isn't checked out");
+        }
+
+        if(this.lastCheckedOutBy.get(bookId).equals(staffName)){
+            String borrowerName = isCheckedOutBy.remove(bookId);
+            borrowers.get(borrowerName).removeBorrowedBooks(bookId);
+
+        }else{
+            raiseError();
+        }
+    }
+
     public void addStaff(Staff staff){
         this.staffs.put(staff.getName(), staff);
     }
@@ -70,7 +126,11 @@ class Library{
             raiseError();
         }
         if(checkStaff(staffName)){
-            this.books.remove(bookId);
+            if(checkBookCheckOut(bookId)){
+                raiseError();
+            }else{
+                this.books.remove(bookId);
+            }
         }
         else if(checkBorrower(staffName)){
             throw new Exception("Borrower can not remove book");
@@ -80,9 +140,13 @@ class Library{
         }
     }
 
-    public List<Book> getBooksByAuthor(String author){
+    public List<Book> getBooksByAuthor(String userName, String author) throws Exception{
+        if(!checkBorrower(userName) && !checkStaff(userName)){
+            raiseError();
+        }
+
         List<Book> booksByAuthor = new ArrayList<>();
-        for(Book book: this.books){
+        for(Book book: this.books.values()){
             if(book.getAuthor().equals(author)){
                 booksByAuthor.add(book);
             }
@@ -91,9 +155,13 @@ class Library{
         return booksByAuthor;
     }
     
-    public List<Book> getBooksBySubject(String subject){
+    public List<Book> getBooksBySubject(String userName, String subject) throws Exception{
+        if(!checkBorrower(userName) && !checkStaff(userName)){
+            raiseError();
+        }
+        
         List<Book> booksBySubject = new ArrayList<>();
-        for(Book book: this.books){
+        for(Book book: this.books.values()){
             if(book.getSubject().equals(subject)){
                 booksBySubject.add(book);
             }
