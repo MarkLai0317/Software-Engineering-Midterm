@@ -51,7 +51,7 @@ public class LibrarySystem {
                         for(String bookId: bookIds){
                             library.checkout(line[0], line[2], Integer.parseInt(bookId));
                         }
-                    }else if(line[1].equals("return"){
+                    }else if(line[1].equals("return")){
                         library.returnBook(line[0], Integer.parseInt(line[2]));
                     }else if(line[1].equals("listAuthor")){
                         List<Book> booksByAuthor = library.getBooksByAuthor(line[0], line[2]);
