@@ -84,23 +84,19 @@ class Library {
             throw new Exception("Borrower can not return book");
         }
         if (!checkStaff(staffName)) {
+            System.out.println("1");
             raiseError();
         }
         if (!checkBook(bookId)) {
+            System.out.println("2");
             raiseError();
         }
 
         if (!checkBookCheckOut(bookId)) {
             throw new Exception("Can not return since the book isn't checked out");
         }
-
-        if (this.lastCheckedOutBy.get(bookId).equals(staffName)) {
-            String borrowerName = isCheckedOutBy.remove(bookId);
-            borrowers.get(borrowerName).removeBorrowedBooks(bookId);
-
-        } else {
-            raiseError();
-        }
+        String borrowerName = isCheckedOutBy.remove(bookId);
+        borrowers.get(borrowerName).removeBorrowedBooks(bookId);
     }
 
     public void addStaff(Staff staff) {
