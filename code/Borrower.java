@@ -2,7 +2,7 @@
 public class Borrower{
     private String name;
     private int predefined_borrow_book_number;
-    list<int> booksBorrowed = new ArrayList<int>();
+    private list<int> booksBorrowed = new ArrayList<int>();
 
     public Borrower(String name, int predefined_borrow_book_number){
         this.name = name;
