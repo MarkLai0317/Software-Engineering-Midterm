@@ -80,7 +80,12 @@ public class LibrarySystem {
                     }
                     String[] lineArray = line.split(" ");
                     if (lineArray[1].equals("addBook")) {
-                        String[] bookDetails = reader.readLine().split(" ");
+                        String l = reader.readLine();
+                        if (l == null) {
+                            System.err.println("Error");
+                            continue;
+                        }
+                        String[] bookDetails = l.split(" ");
                         
                         if (bookDetails.length != 2) {
                             System.err.println("Error");
