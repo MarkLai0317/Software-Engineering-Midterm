@@ -1,0 +1,17 @@
+Error
+Borrower can not remove book
+Error
+Borrower can not return book
+Can not return since the book isn't checked out 
+
+
+// No book 7
+Error
+// Borrower B cannot remove book
+Borrower can not remove book
+// No User E
+Error
+// Borrower B cannot return book
+Borrower can not return book
+// 
+Can not return since the book isn't checked out 

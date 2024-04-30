@@ -1,0 +1,11 @@
+Borrower can not add book
+Error
+Can not check out since the book is checked out
+ID: 0 Author: AuthorA Subject: SubjectA
+ID: 0 Author: AuthorA Subject: SubjectA
+ID: 1 Author: AuthorB Subject: SubjectB
+User: UserB
+Error
+Error
+Borrower can not check out the books
+Can not check out since the number of books exceed the limitation of user can check-out

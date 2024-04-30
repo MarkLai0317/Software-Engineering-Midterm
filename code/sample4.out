@@ -1,0 +1,12 @@
+ID: 0 Author: AuthorA Subject: SubjectA
+ID: 1 Author: AuthorA Subject: SubjectB
+ID: 3 Author: AuthorC Subject: SubjectC
+Error
+
+// listAuthor A
+ID: 0 Author: AuthorA Subject: SubjectA
+ID: 1 Author: AuthorA Subject: SubjectB
+// listSubject C
+ID: 3 Author: AuthorC Subject: SubjectC
+// addBook 少一行
+Error

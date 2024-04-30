@@ -1,0 +1,9 @@
+Error
+Can not return since the book isn't checked out
+Borrower can not return book
+Borrower can not return book
+ID: 0 Author: AuthorA Subject: SubjectA
+ID: 1 Author: AuthorD Subject: SubjectA
+ID: 2 Author: AuthorB Subject: SubjectA
+ID: 0 Author: AuthorA Subject: SubjectA
+ID: 2 Author: AuthorB Subject: SubjectA

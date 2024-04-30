@@ -1,0 +1,19 @@
+Borrower can not find borrower
+Error
+ID: 0 Author: AuthorA Subject: SubjectA
+ID: 1 Author: AuthorB Subject: SubjectB
+Borrower can not find books checked out by other users
+Error
+
+
+// User B is borrower
+Borrower can not find borrower
+// No User C
+Error
+// findChecked (Borrower B can check B)
+ID: 0 Author: AuthorA Subject: SubjectA
+ID: 1 Author: AuthorB Subject: SubjectB
+// User D is borrower
+Borrower can not find books checked out by other users
+// No User C
+Error

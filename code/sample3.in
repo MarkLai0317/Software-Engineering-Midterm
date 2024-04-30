@@ -1,0 +1,13 @@
+3
+AuthorA SubjectA
+AuthorB SubjectB
+AuthorC SubjectC
+3
+Staff UserA
+Borrower UserB 2
+Borrower UserC 1
+UserA removeBook 7
+UserB removeBook 3
+UserE return 0
+UserB return 0
+UserA return 0 1
