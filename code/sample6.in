@@ -1,0 +1,15 @@
+3
+AuthorA SubjectA
+AuthorB SubjectB
+AuthorC SubjectC
+3
+Staff UserA
+Borrower UserB 2
+Borrower UserD 2
+UserB Borrower 1
+UserC Borrower 1
+UserA checkout UserB
+0 1
+UserB findChecked UserB
+UserD findChecked UserB
+UserC findChecked UserB
