@@ -17,6 +17,8 @@ UserA checkout UserC
 0
 UserA return 0
 UserA listAuthor AuthorA
+UserA addBook
+AuthorD SubjectB
 UserA listSubject SubjectB
 UserA findChecked UserB
 UserA Borrower 1
