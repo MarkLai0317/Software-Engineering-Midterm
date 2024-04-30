@@ -166,11 +166,10 @@ class Library {
     }
 
     public List<Book> findBooksCheckedOutBy(String userName, String borrowerName) throws Exception {
-
         if (checkBorrower(userName) && !userName.equals(borrowerName)) {
             throw new Exception("Borrower can not find books checked out by other users");
         } 
-        else if (checkStaff(userName) && checkBorrower(borrowerName)) {
+        else if ((checkStaff(userName) && checkBorrower(borrowerName)) || (borrowerName.equals(userName) && checkBorrower(borrowerName))) {
             List<Book> booksCheck = new ArrayList<>();
             for (int bookId : borrowers.get(borrowerName).getBorrowedBook()) {
                 booksCheck.add(this.books.get(bookId));
