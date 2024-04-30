@@ -122,15 +122,15 @@ class Library {
         if (!checkBook(bookId)) {
             raiseError();
         } 
-        else {
-            raiseError();
-        }
         if (checkStaff(staffName)) {
             if (checkBookCheckOut(bookId)) {
                 raiseError();
             } else {
                 this.books.remove(bookId);
             }
+        }
+        else {
+            raiseError();
         }
     }
 
