@@ -121,19 +121,19 @@ class Library {
             throw new Exception("Borrower can not remove book");
         }
         if (!checkBook(bookId)) {
-            System.out.println("Book not found");
+            // System.out.println("Book not found");
             raiseError();
         } 
         if (checkStaff(staffName)) {
             if (checkBookCheckOut(bookId)) {
-                System.out.println("Can not remove since the book is checked out");
+                // System.out.println("Can not remove since the book is checked out");
                 raiseError();
             } else {
                 this.books.remove(bookId);
             }
         }
         else {
-            System.out.println("Staff not found");
+            // System.out.println("Staff not found");
             raiseError();
         }
     }

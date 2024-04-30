@@ -74,10 +74,20 @@ public class LibrarySystem {
             }
             while ((line = reader.readLine()) != null) {
                 try {
-                    System.out.println(line);
+                    // System.out.println(line);
+                    if (line.equals("")) {
+                        continue;
+                    }
                     String[] lineArray = line.split(" ");
                     if (lineArray[1].equals("addBook")) {
                         String[] bookDetails = reader.readLine().split(" ");
+                        
+                        if (bookDetails.length != 2) {
+                            System.err.println("Error");
+                            continue;
+                        }
+
+
                         String Author = bookDetails[0];
                         String Subject = bookDetails[1];
                         Book book = new Book(Author, Subject);
@@ -116,6 +126,9 @@ public class LibrarySystem {
                     } else if (lineArray[1].equals("Borrower")) {
                         Borrower borrower = library.getLastBorrower(lineArray[0], Integer.parseInt(lineArray[2]));
                         System.out.println("User: " + borrower.getName());
+                    }
+                    else {
+                        System.err.println("Error");
                     }
 
                 } catch (Exception exception) {
