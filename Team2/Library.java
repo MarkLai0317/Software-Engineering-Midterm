@@ -51,13 +51,6 @@ class Library {
         if (checkBorrower(staffName)) {
             throw new Exception("Borrower can not check out the books");
         }
-        if (borrowers.get(borrowerName).getPredefinedBorrowBookNumber() <= borrowers.get(borrowerName).getBorrowedBookCount()) {
-            throw new Exception(
-                    "Can not check out since the number of books exceed the limitation of user can check-out");
-        }
-        if (checkBookCheckOut(bookId)) {
-            throw new Exception("Can not check out since the book is checked out.");
-        }
         if (!checkStaff(staffName)) {
             raiseError();
         }
@@ -71,6 +64,16 @@ class Library {
             raiseError();
         }
 
+        if (borrowers.get(borrowerName).getPredefinedBorrowBookNumber() <= borrowers.get(borrowerName)
+                .getBorrowedBookCount()) {
+            throw new Exception(
+                    "Can not check out since the number of books exceed the limitation of user can check-out");
+        }
+
+        if (checkBookCheckOut(bookId)) {
+            throw new Exception("Can not check out since the book is checked out.");
+        }
+
         borrowers.get(borrowerName).addBorrowedBook(bookId);
         isCheckedOutBy.put(bookId, borrowerName);
         lastCheckedOutBy.put(bookId, borrowerName);
@@ -80,17 +83,18 @@ class Library {
         if (checkBorrower(staffName)) {
             throw new Exception("Borrower can not return book");
         }
-        if (!checkBookCheckOut(bookId)) {
-            throw new Exception("Can not return since the book isn't checked out");
-        }
         if (!checkStaff(staffName)) {
+            System.out.println("1");
             raiseError();
         }
         if (!checkBook(bookId)) {
+            System.out.println("2");
             raiseError();
         }
 
-        
+        if (!checkBookCheckOut(bookId)) {
+            throw new Exception("Can not return since the book isn't checked out");
+        }
         String borrowerName = isCheckedOutBy.remove(bookId);
         borrowers.get(borrowerName).removeBorrowedBooks(bookId);
     }
@@ -104,25 +108,17 @@ class Library {
     }
 
     public void addBook(String staffName, Book book) throws Exception {
-        if (checkBorrower(staffName)) {
-            throw new Exception("Borrower can not add book");
-        } 
-        else if (checkStaff(staffName)) {
+        if (checkStaff(staffName)) {
             this.books.put(this.idCounter++, book);
-        }
-        else {
+        } else if (checkBorrower(staffName)) {
+            throw new Exception("Borrower can not add book");
+        } else {
             raiseError();
         }
     }
 
     public void removeBook(String staffName, int bookId) throws Exception {
-        if (checkBorrower(staffName)) {
-            throw new Exception("Borrower can not remove book");
-        }
         if (!checkBook(bookId)) {
-            raiseError();
-        } 
-        else {
             raiseError();
         }
         if (checkStaff(staffName)) {
@@ -131,6 +127,10 @@ class Library {
             } else {
                 this.books.remove(bookId);
             }
+        } else if (checkBorrower(staffName)) {
+            throw new Exception("Borrower can not remove book");
+        } else {
+            raiseError();
         }
     }
 
@@ -166,17 +166,15 @@ class Library {
 
     public List<Book> findBooksCheckedOutBy(String userName, String borrowerName) throws Exception {
 
-        if (checkBorrower(userName) && !userName.equals(borrowerName)) {
-            throw new Exception("Borrower can not find books checked out by other users");
-        } 
-        else if (checkStaff(userName) && checkBorrower(borrowerName)) {
+        if (checkStaff(userName) && checkBorrower(borrowerName)) {
             List<Book> booksCheck = new ArrayList<>();
             for (int bookId : borrowers.get(borrowerName).getBorrowedBook()) {
                 booksCheck.add(this.books.get(bookId));
             }
             return booksCheck;
-        } 
-        else {
+        } else if (checkBorrower(userName) && !userName.equals(borrowerName)) {
+            throw new Exception("Borrower can not find books checked out by other users");
+        } else {
             raiseError();
         }
 
@@ -185,15 +183,14 @@ class Library {
     }
 
     public Borrower getLastBorrower(String staffName, int bookId) throws Exception {
-        if (checkBorrower(staffName)) {
-            throw new Exception("Borrower can not find borrower");
-        }
         if (!checkBook(bookId)) {
             raiseError();
         }
         if (checkStaff(staffName)) {
             return borrowers.get(lastCheckedOutBy.get(bookId));
-        } else{
+        } else if (checkBorrower(staffName)) {
+            throw new Exception("Borrower can not find borrower");
+        } else {
             raiseError();
         }
 
