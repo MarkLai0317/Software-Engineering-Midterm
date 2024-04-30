@@ -3,8 +3,7 @@ Error
 Can not check out since the book is checked out
 ID: 0 Author: AuthorA Subject: SubjectA
 ID: 1 Author: AuthorB Subject: SubjectB
-ID: 3 Author: AuthorD Subject: SubjectB
-ID: 0 Author: AuthorA Subject: SubjectA
+ID: 4 Author: AuthorD Subject: SubjectB
 ID: 1 Author: AuthorB Subject: SubjectB
 User: UserB
 Error
@@ -23,9 +22,8 @@ Can not check out since the book is checked out
 ID: 0 Author: AuthorA Subject: SubjectA
 // listSubjectB
 ID: 1 Author: AuthorB Subject: SubjectB
-ID: 3 Author: AuthorD Subject: SubjectB
+ID: 4 Author: AuthorD Subject: SubjectB
 // findChecked UserB
-ID: 0 Author: AuthorA Subject: SubjectA
 ID: 1 Author: AuthorB Subject: SubjectB
 // User B borrow book 1
 User: UserB
