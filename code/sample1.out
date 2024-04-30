@@ -7,3 +7,20 @@ ID: 1 Author: AuthorD Subject: SubjectA
 ID: 2 Author: AuthorB Subject: SubjectA
 ID: 0 Author: AuthorA Subject: SubjectA
 ID: 2 Author: AuthorB Subject: SubjectA
+
+
+// no book 7
+Error
+// book 2 is not checked out
+Can not return since the book isn't checked out
+// Borrower B
+Borrower can not return book
+// Borrower B
+Borrower can not return book
+// listSubject A
+ID: 0 Author: AuthorA Subject: SubjectA
+ID: 1 Author: AuthorD Subject: SubjectA
+ID: 2 Author: AuthorB Subject: SubjectA
+// listSubject A (book1 has been removed)
+ID: 0 Author: AuthorA Subject: SubjectA
+ID: 2 Author: AuthorB Subject: SubjectA

@@ -1,3 +1,10 @@
 Error
 Error
 ID: 0 Author: AuthorA Subject: SubjectA
+
+// wrong format of 1st line
+Error
+// wrong format of 6th line
+Error
+// listAuthor
+ID: 0 Author: AuthorA Subject: SubjectA

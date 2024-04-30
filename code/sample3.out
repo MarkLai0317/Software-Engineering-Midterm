@@ -13,5 +13,5 @@ Borrower can not remove book
 Error
 // Borrower B cannot return book
 Borrower can not return book
-// 0, 1 isn't checked out
+// 0, 1 are not checked out
 Can not return since the book isn't checked out 
