@@ -3,7 +3,22 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+
+
+
 public class LibrarySystem {
+
+    public static boolean isinteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true; // String can be parsed as an integer
+        } catch (NumberFormatException e) {
+            return false; // String cannot be parsed as an integer
+        }
+    }
+
+
+
     public static void main(String[] args) {
         if (args.length != 1) {
             System.out.println("Usage: java Main <inputFile>");
@@ -15,17 +30,35 @@ public class LibrarySystem {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFileName))) {
             String line;
             // Read the first line to get the number of books
-            int numBooks = Integer.parseInt(reader.readLine());
+            String[] firstLine = reader.readLine().split(" ");
+            while (firstLine.length != 1 || !isinteger(firstLine[0])) {
+                System.err.println("Error");
+                firstLine = reader.readLine().split(" ");
+            }
+            
+
+            int numBooks = Integer.parseInt(firstLine[0]);
+            //int numBooks = Integer.parseInt(reader.readLine());
             List<Book> books = new ArrayList<Book>();
             for (int i = 0; i < numBooks; i++) {
                 String[] bookDetails = reader.readLine().split(" ");
+                if (bookDetails.length != 2) {
+                    System.err.println("Error");
+                    continue;
+                }
                 String Author = bookDetails[0];
                 String Subject = bookDetails[1];
                 Book book = new Book(Author, Subject);
                 books.add(book);
             }
             Library library = new Library(books);
-            int numUsers = Integer.parseInt(reader.readLine());
+            
+            String[] userNum = reader.readLine().split(" ");
+            while (userNum.length != 1 || !isinteger(userNum[0])) {
+                System.err.println("Error");
+                userNum = reader.readLine().split(" ");
+            }
+            int numUsers = Integer.parseInt(userNum[0]);
             for (int i = 0; i < numUsers; i++) {
                 String[] userDetails = reader.readLine().split(" ");
                 if (userDetails[0].equals("Staff")) {
@@ -95,5 +128,10 @@ public class LibrarySystem {
             System.err.println("Error");
             System.exit(1);
         }
+    }
+
+    private static boolean isInteger(String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isInteger'");
     }
 }
