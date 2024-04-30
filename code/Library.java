@@ -51,6 +51,9 @@ class Library {
         if (checkBorrower(staffName)) {
             throw new Exception("Borrower can not check out the books");
         }
+        if (!checkBorrower(borrowerName)) {
+            raiseError();
+        }
         if (borrowers.get(borrowerName).getPredefinedBorrowBookNumber() <= borrowers.get(borrowerName).getBorrowedBookCount()) {
             throw new Exception(
                     "Can not check out since the number of books exceed the limitation of user can check-out");
@@ -59,9 +62,6 @@ class Library {
             throw new Exception("Can not check out since the book is checked out.");
         }
         if (!checkStaff(staffName)) {
-            raiseError();
-        }
-        if (!checkBorrower(borrowerName)) {
             raiseError();
         }
         if (checkStaff(borrowerName)) {

@@ -7,6 +7,7 @@ Staff UserA
 Borrower UserB 2
 Borrower UserC 1
 UserB addBook
+AuthorD SubjectB
 UserA addBook
 AuthorD SubjectB
 UserA removeBook 7
@@ -23,12 +24,10 @@ UserA listSubject SubjectB
 UserA findChecked UserB
 UserA Borrower 1
 UserD addBook
+AuthorD SubjectB
 UserA checkout UserD
 3
 UserB checkout UserC
 0 1
 UserA checkout UserC
 0 1
-
-
-
