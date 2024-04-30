@@ -108,6 +108,7 @@ class Library {
             throw new Exception("Borrower can not add book");
         } 
         else if (checkStaff(staffName)) {
+            book.setId(this.idCounter);
             this.books.put(this.idCounter++, book);
         }
         else {
