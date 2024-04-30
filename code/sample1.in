@@ -15,5 +15,5 @@ UserA return 0
 UserB return 1
 UserB return 8
 UserA listSubject SubjectA
-UserA removeBook 1
+UserA removeBook 0
 UserA listSubject SubjectA
