@@ -41,6 +41,7 @@ public class LibrarySystem {
             }
             while ((line = reader.readLine()) != null) {
                 try {
+                    System.out.println(line);
                     String[] lineArray = line.split(" ");
                     if (lineArray[1].equals("addBook")) {
                         String[] bookDetails = reader.readLine().split(" ");
