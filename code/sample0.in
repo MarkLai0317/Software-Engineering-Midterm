@@ -8,7 +8,7 @@ Borrower UserB 2
 Borrower UserC 1
 UserB addBook
 UserA addBook
-AuthorD SubjectD
+AuthorD SubjectB
 UserA removeBook 7
 UserA removeBook 3
 UserA checkout UserB
@@ -17,12 +17,12 @@ UserA checkout UserC
 0
 UserA return 0
 UserA listAuthor AuthorA
-UserA listSubject SubjectA
+UserA listSubject SubjectB
 UserA findChecked UserB
 UserA Borrower 1
 UserD addBook
 UserA checkout UserD
-0 1
+3
 UserB checkout UserC
 0 1
 UserA checkout UserC

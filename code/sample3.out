@@ -9,8 +9,8 @@ Can not return since the book isn't checked out
 Error
 // Borrower B cannot remove book
 Borrower can not remove book
-// No User E
-Error
+// 0 isn't checked out
+Can not return since the book isn't checked out 
 // Borrower B cannot return book
 Borrower can not return book
 // 0, 1 are not checked out
