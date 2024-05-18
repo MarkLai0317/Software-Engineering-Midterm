@@ -32,7 +32,7 @@ public class LibrarySystem {
             // Read the first line to get the number of books
             String[] firstLine = reader.readLine().split(" ");
             while (firstLine.length != 1 || !isinteger(firstLine[0])) {
-                System.err.println("Error");
+                System.out.println("Error");
                 firstLine = reader.readLine().split(" ");
             }
             
@@ -43,7 +43,7 @@ public class LibrarySystem {
             for (int i = 0; i < numBooks; i++) {
                 String[] bookDetails = reader.readLine().split(" ");
                 if (bookDetails.length != 2) {
-                    System.err.println("Error");
+                    System.out.println("Error");
                     continue;
                 }
                 String Author = bookDetails[0];
@@ -55,7 +55,7 @@ public class LibrarySystem {
             
             String[] userNum = reader.readLine().split(" ");
             while (userNum.length != 1 || !isinteger(userNum[0])) {
-                System.err.println("Error");
+                System.out.println("Error");
                 userNum = reader.readLine().split(" ");
             }
             int numUsers = Integer.parseInt(userNum[0]);
@@ -80,15 +80,19 @@ public class LibrarySystem {
                     }
                     String[] lineArray = line.split(" ");
                     if (lineArray[1].equals("addBook")) {
+                        if (!library.checkStaff(lineArray[0]) && !library.checkBorrower(lineArray[0])) {
+                          System.out.println("Error");
+                          continue;
+                        }
                         String l = reader.readLine();
                         if (l == null) {
-                            System.err.println("Error");
+                            System.out.println("Error");
                             continue;
                         }
                         String[] bookDetails = l.split(" ");
                         
                         if (bookDetails.length != 2) {
-                            System.err.println("Error");
+                            System.out.println("Error");
                             continue;
                         }
 
@@ -102,6 +106,14 @@ public class LibrarySystem {
                         library.removeBook(lineArray[0], Integer.parseInt(lineArray[2]));
 
                     } else if (lineArray[1].equals("checkout")) {
+                        if (!library.checkStaff(lineArray[0]) && !library.checkBorrower(lineArray[0])) {
+                            System.out.println("Error");
+                            continue;
+                        }
+                        if (!library.checkStaff(lineArray[2]) && !library.checkBorrower(lineArray[2])) {
+                            System.out.println("Error");
+                            continue;
+                        }
                         String[] bookIds = reader.readLine().split(" ");
                         for (String bookId : bookIds) {
                             library.checkoutBook(lineArray[0], lineArray[2], Integer.parseInt(bookId));
@@ -133,17 +145,17 @@ public class LibrarySystem {
                         System.out.println("User: " + borrower.getName());
                     }
                     else {
-                        System.err.println("Error");
+                    System.out.println("Error");
                     }
 
                 } catch (Exception exception) {
-                    System.err.println(exception.getMessage());
+                    System.out.println(exception.getMessage());
                 }
 
             }
 
         } catch (IOException e) {
-            System.err.println("Error");
+            System.out.println("Error");
             System.exit(1);
         }
     }

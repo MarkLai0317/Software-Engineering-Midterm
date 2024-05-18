@@ -27,11 +27,11 @@ class Library {
         throw new Exception("Error");
     }
 
-    private boolean checkStaff(String staffName) {
+    public boolean checkStaff(String staffName) {
         return this.staffs.containsKey(staffName);
     }
 
-    private boolean checkBorrower(String borrowerName) {
+    public boolean checkBorrower(String borrowerName) {
         return this.borrowers.containsKey(borrowerName);
     }
 
