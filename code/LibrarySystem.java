@@ -79,6 +79,10 @@ public class LibrarySystem {
                         continue;
                     }
                     String[] lineArray = line.split(" ");
+                    if(lineArray.length < 2){
+                        System.out.println("Error");
+                        continue;
+                    }
                     if (lineArray[1].equals("addBook")) {
                         if (!library.checkStaff(lineArray[0]) && !library.checkBorrower(lineArray[0])) {
                           System.out.println("Error");
