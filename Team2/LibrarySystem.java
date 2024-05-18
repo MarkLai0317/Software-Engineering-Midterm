@@ -43,6 +43,10 @@ public class LibrarySystem {
                 try {
                     String[] lineArray = line.split(" ");
                     if (lineArray[1].equals("addBook")) {
+                        if(library.checkStaff(lineArray[0]) == false && library.checkBorrower(lineArray[0]) == false){
+                            System.out.println("Error");
+                            continue;
+                        }
                         String[] bookDetails = reader.readLine().split(" ");
                         String Author = bookDetails[0];
                         String Subject = bookDetails[1];
@@ -53,6 +57,17 @@ public class LibrarySystem {
                         library.removeBook(lineArray[0], Integer.parseInt(lineArray[2]));
 
                     } else if (lineArray[1].equals("checkout")) {
+                        if(library.checkStaff(lineArray[0]) == false && library.checkBorrower(lineArray[0]) == false){
+                            System.out.println("Error");
+                            continue;
+                        }
+
+                        if(library.checkStaff(lineArray[2]) == false && library.checkBorrower(lineArray[2]) == false){
+                            System.out.println("Error");
+                            continue;
+                        }
+
+                        
                         String[] bookIds = reader.readLine().split(" ");
                         for (String bookId : bookIds) {
                             library.checkoutBook(lineArray[0], lineArray[2], Integer.parseInt(bookId));
@@ -83,15 +98,18 @@ public class LibrarySystem {
                         Borrower borrower = library.getLastBorrower(lineArray[0], Integer.parseInt(lineArray[2]));
                         System.out.println("User: " + borrower.getName());
                     }
+                    else{
+                        System.out.println("Error");
+                    }
 
                 } catch (Exception exception) {
-                    System.err.println(exception.getMessage());
+                    System.out.println(exception.getMessage());
                 }
 
             }
 
         } catch (IOException e) {
-            System.err.println("Error");
+            System.out.println("Error");
             System.exit(1);
         }
     }
